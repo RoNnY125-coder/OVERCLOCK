@@ -24,9 +24,9 @@ export default function LedgerPage() {
       <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b-[3px] border-black pb-6">
         <div>
           <h1 className="font-space text-3xl sm:text-5xl font-bold text-white uppercase tracking-tighter mb-1">
-            LEDGER // ARCHIVE
+            LEDGER ARCHIVE
           </h1>
-          <p className="font-mono text-xs text-[#c6c6c6]">{'// HISTORICAL TRANSACTION AUDIT LOGS'}</p>
+          <p className="font-mono text-xs text-[#c6c6c6]">HISTORICAL TRANSACTION AUDIT LOGS</p>
         </div>
 
         <div className="flex items-center gap-3">

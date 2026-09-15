@@ -33,7 +33,7 @@ export default function AchievementsPage() {
             <h1 className="font-space text-3xl sm:text-5xl font-bold text-white uppercase tracking-tighter">
               Combat Log
             </h1>
-            <p className="font-mono text-xs text-[#c6c6c6]">{'// RECORD OF FINANCIAL DISCIPLINE & TROPHIES'}</p>
+            <p className="font-mono text-xs text-[#c6c6c6]">RECORD OF FINANCIAL DISCIPLINE &amp; TROPHIES</p>
           </div>
 
           <div className="flex items-center gap-3 bg-[#131313] border-[3px] border-black px-4 py-2 brutalist-shadow">

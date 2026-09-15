@@ -4,7 +4,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     DATABASE_URL: str
-    GEMINI_API_KEY: str
+    GEMINI_API_KEY: str = ""
     APP_ENV: str = "development"
     APP_NAME: str = "Overclock"
 

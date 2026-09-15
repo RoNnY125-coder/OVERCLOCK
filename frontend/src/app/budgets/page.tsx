@@ -29,14 +29,22 @@ export default function BudgetsPage() {
             </span>
           </div>
 
-          <div className="border-[3px] border-black bg-[#1a1a1a] p-3 brutalist-shadow">
+          <div className="border-[3px] border-black bg-[#1a1a1a] px-4 py-1.5 brutalist-shadow">
             <div className="font-mono text-[10px] text-[#77da9f] mb-0.5 uppercase tracking-widest font-bold">
               Total Remaining
             </div>
-            <div className="font-space text-2xl font-bold text-white">
+            <div className="font-space text-xl font-bold text-white">
               ${totalRemaining.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
           </div>
+
+          <button
+            onClick={() => setAddBudgetOpen(true)}
+            className="bg-[#cb2957] text-white border-[3px] border-black px-4 py-2.5 font-mono text-xs font-bold uppercase brutalist-shadow flex items-center gap-2 whitespace-nowrap hover:bg-[#ffb2bd] hover:text-black transition-colors"
+          >
+            <span className="material-symbols-outlined text-sm font-bold">add</span>
+            NEW BUDGET
+          </button>
         </div>
       </header>
 

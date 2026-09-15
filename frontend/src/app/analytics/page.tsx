@@ -18,9 +18,9 @@ export default function AnalyticsPage() {
       <header className="mb-8 border-b-[3px] border-black pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
           <h1 className="font-space text-3xl sm:text-5xl font-bold text-white uppercase tracking-tighter mb-1">
-            DATA // VISUALIZER
+            DATA VISUALIZER
           </h1>
-          <p className="font-mono text-xs text-[#c6c6c6]">{'// System Status: Optimal | Data Stream: Active'}</p>
+          <p className="font-mono text-xs text-[#c6c6c6]">System Status: Optimal | Data Stream: Active</p>
         </div>
 
         {/* Avatar + Level Badge */}

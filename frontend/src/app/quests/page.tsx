@@ -11,13 +11,13 @@ export default function QuestsPage() {
       isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
     }`}>
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-8 gap-4 border-b-[3px] border-black pb-6">
+      <header className="flex flex-col md:flex-row md:justify-between md:items-end mb-8 gap-4 border-b-[3px] border-black pb-6">
         <div>
-          <h1 className="font-space text-3xl sm:text-5xl font-bold text-[#ffb2bd] uppercase mb-2">
+          <h1 className="font-space text-3xl sm:text-5xl font-bold text-white uppercase tracking-tighter mb-1">
             Savings Goals
           </h1>
-          <p className="font-inter text-sm text-[#c6c6c6]">
-            Add money to goals from your available balance.
+          <p className="font-mono text-xs sm:text-sm text-[#c6c6c6]">
+            Add money to goals from your available balance
           </p>
         </div>
 
@@ -32,13 +32,13 @@ export default function QuestsPage() {
 
           <button
             onClick={() => setAddGoalOpen(true)}
-            className="bg-[#ffb2bd] text-black border-[3px] border-black px-5 py-2.5 font-mono text-xs font-bold uppercase brutalist-shadow flex items-center gap-2 whitespace-nowrap hover:bg-white transition-colors"
+            className="bg-[#cb2957] text-white border-[3px] border-black px-5 py-2.5 font-mono text-xs font-bold uppercase brutalist-shadow flex items-center gap-2 whitespace-nowrap hover:bg-[#ffb2bd] hover:text-black transition-colors"
           >
             <span className="material-symbols-outlined text-sm font-bold">add</span>
             NEW GOAL
           </button>
         </div>
-      </div>
+      </header>
 
       {/* Quest Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">

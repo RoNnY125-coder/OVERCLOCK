@@ -54,7 +54,7 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2 bg-[#1a1a1a] border-[3px] border-black px-3 py-1 brutalist-shadow">
               <AvatarIcon character={selectedCharacter} size="sm" />
               <span className="font-mono text-xs font-bold text-[#ffb2bd]">
-                {selectedCharacter.name} {'//'} LVL {level}
+                {selectedCharacter.name} • LVL {level}
               </span>
             </div>
           </div>

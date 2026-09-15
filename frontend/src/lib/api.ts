@@ -16,7 +16,7 @@ const BASE_URL =
 
 function getUserId(): number {
   if (typeof window === 'undefined') return 0; // SSR guard
-  const id = localStorage.getItem('finquest_user_id');
+  const id = localStorage.getItem('nyx_user_id');
   if (!id) throw new Error('No user_id — complete character setup first.');
   return parseInt(id, 10);
 }
@@ -165,12 +165,15 @@ export interface ApiNotification {
 // Maps frontend character IDs → backend CharacterClass enum values
 
 export const CHARACTER_CLASS_MAP: Record<string, string> = {
-  vanguard:   'WARRIOR',
-  pathfinder: 'WARRIOR',
-  ranger:     'HUNTER',
-  shadow:     'ROGUE',
-  mystic:     'MAGE',
-  sorcerer:   'MAGE',
+  vanguard:   'warrior',
+  pathfinder: 'ranger',
+  ranger:     'ranger',
+  shadow:     'ranger',
+  mystic:     'mage',
+  sorcerer:   'mage',
+  berserker:  'warrior',
+  scholar:    'mage',
+  goblin:     'paladin',
 };
 
 // ── Users ─────────────────────────────────────────────────────────────────────
@@ -191,7 +194,7 @@ export async function registerCharacter(payload: CreateUserPayload): Promise<Api
     method: 'POST',
     body: JSON.stringify(payload),
   });
-  localStorage.setItem('finquest_user_id', String(user.id));
+  localStorage.setItem('nyx_user_id', String(user.id));
   return user;
 }
 

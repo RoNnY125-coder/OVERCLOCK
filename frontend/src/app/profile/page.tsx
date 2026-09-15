@@ -140,7 +140,7 @@ export default function ProfilePage() {
           <AvatarIcon character={selectedCharacter} size="md" />
           <div>
             <div className="font-space font-bold text-white text-base uppercase">{agentName}</div>
-            <div className="font-mono text-xs text-[#cb2957] font-bold">{selectedCharacter.classTitle} {'//'} LVL {level}</div>
+            <div className="font-mono text-xs text-[#cb2957] font-bold">{selectedCharacter.classTitle} • LVL {level}</div>
           </div>
         </div>
       </header>

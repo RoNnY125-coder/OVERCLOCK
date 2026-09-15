@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -26,7 +28,16 @@ from app.api import (
     demo,
 )
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Create all DB tables on startup (idempotent — safe to call every time)
+    Base.metadata.create_all(bind=engine)
+    yield
+
+
 app = FastAPI(
+    lifespan=lifespan,
     title="Overclock API",
     description="""
 ## 🐉 Overclock — Gamified Personal Finance RPG

@@ -19,8 +19,14 @@ from google.genai import types
 from app.models.user import User
 from app.config import settings
 
-# Initialize the new SDK client
-client = genai.Client(api_key=settings.GEMINI_API_KEY)
+# Lazy client initialization
+def get_genai_client():
+    if not settings.GEMINI_API_KEY or not settings.GEMINI_API_KEY.strip():
+        return None
+    try:
+        return genai.Client(api_key=settings.GEMINI_API_KEY)
+    except Exception:
+        return None
 
 ATHENA_PERSONA = """
 You are Athena, an AI financial companion in a fantasy RPG finance game called Overclock.
@@ -79,6 +85,10 @@ async def analyze_finances(user_data: dict) -> dict:
     prompt = build_financial_prompt(user_data)
 
     try:
+        client = get_genai_client()
+        if not client:
+            raise ValueError("Gemini API key not configured")
+
         response = client.models.generate_content(
             model='gemini-2.5-flash',
             contents=prompt,
