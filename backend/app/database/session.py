@@ -5,11 +5,12 @@ from app.config import settings
 
 def _normalize_db_url(url: str) -> str:
     """
-    Normalize the database URL for SQLAlchemy + psycopg3 compatibility.
+    Normalize the database URL for SQLAlchemy compatibility.
 
     - Catches accidental use of the Supabase HTTPS API URL.
-    - Converts 'postgres://' → 'postgresql+psycopg://' (psycopg3 driver).
-    - Converts 'postgresql://' → 'postgresql+psycopg://' (psycopg3 driver).
+    - Converts 'postgres://' → 'postgresql+psycopg://' when psycopg3 is available.
+    - Falls back to plain 'postgresql://' (uses psycopg2) if psycopg3 is not installed.
+    - SQLite URLs are returned as-is.
     """
     if url.startswith("sqlite"):
         return url
@@ -23,12 +24,26 @@ def _normalize_db_url(url: str) -> str:
             "    It should look like:\n"
             "    postgresql://postgres:[password]@db.[ref].supabase.co:5432/postgres\n"
         )
-    # Normalise scheme — psycopg3 dialect requires 'postgresql+psycopg://'
-    if url.startswith("postgres://"):
-        url = url.replace("postgres://", "postgresql+psycopg://", 1)
-    elif url.startswith("postgresql://"):
-        url = url.replace("postgresql://", "postgresql+psycopg://", 1)
-    # If someone already specified the driver, leave it alone
+
+    # Check if psycopg3 is available; if not, fall back to the generic dialect
+    try:
+        import psycopg  # noqa: F401
+        _psycopg3_available = True
+    except ImportError:
+        _psycopg3_available = False
+
+    if _psycopg3_available:
+        # Use psycopg3 dialect
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql+psycopg://", 1)
+        elif url.startswith("postgresql://") and "+psycopg" not in url:
+            url = url.replace("postgresql://", "postgresql+psycopg://", 1)
+    else:
+        # psycopg3 not installed — use generic postgresql:// (needs psycopg2)
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql://", 1)
+
+    # If someone already specified the driver (e.g. postgresql+psycopg2://), leave it alone
     return url
 
 

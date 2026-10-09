@@ -1,3 +1,4 @@
+import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -28,11 +29,22 @@ from app.api import (
     demo,
 )
 
+logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Log which database backend is active — helpful for Railway deployment debugging
+    db_url = str(engine.url)
+    db_type = "PostgreSQL" if "postgresql" in db_url or "postgres" in db_url else "SQLite"
+    db_display = db_url.split("@")[-1] if "@" in db_url else db_url
+    logger.info(f"🐉 Starting up Overclock API v1.0.0...")
+    logger.info(f"📦 Database: {db_type} ({db_display})")
+    logger.info(f"🤖 Gemini AI: {'enabled' if settings.GEMINI_API_KEY else 'disabled (no API key)'}")
+
     # Create all DB tables on startup (idempotent — safe to call every time)
     Base.metadata.create_all(bind=engine)
+    logger.info("✅ Database tables initialized successfully.")
     yield
 
 
